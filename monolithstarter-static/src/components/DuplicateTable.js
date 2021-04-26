@@ -27,7 +27,6 @@ class DuplicateTable extends Component {
   }
 
   getDataEntries(entries) {
-    console.debug(entries);
     let id = 0;
     return entries.map((entryList) => {
       if(entryList.length === 1) {
