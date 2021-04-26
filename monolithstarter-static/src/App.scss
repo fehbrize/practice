@@ -1,0 +1,17 @@
+.dupe {
+  background: indianred;
+}
+.has-dupes {
+  background: #ffc3bd;
+  &:hover {
+    background: lightcoral;
+  }
+}
+
+.no-dupes {
+  background: #c1ffbd;
+}
+
+Button {
+  float: left;
+}
