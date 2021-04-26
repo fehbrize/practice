@@ -22,16 +22,22 @@ public class DuplicateFinderService {
         int numMatchingColumns = 0;
         String[] getters = {"getFirstName", "getLastName", "getCompany", "getEmail", "getAddress1", "getAddress2",
             "getZip", "getCity", "getLongState", "getShortState", "getPhone"};
+
+        /*Check the row against all previously read rows*/
         for(int i = 0; i < entries.size(); i++) {
             Entry rowA = entries.get(i).get(0);
             for(int j = 1; j < getters.length; j++) {
                 Method rowAGetter = rowA.getClass().getDeclaredMethod(getters[j]);
                 Method rowBGetter = rowB.getClass().getDeclaredMethod(getters[j]);
                 int lDistance = ld.apply((String)rowAGetter.invoke(rowA), (String)rowBGetter.invoke(rowB));
+
+                /*If the strings are at least 60% similar (levenshtein distance of 40% of the length or less, they're
+                 a match*/
                 if(lDistance < (0.4 *  ((String) rowAGetter.invoke(rowA)).length())) {
                     numMatchingColumns += 1;
                 }
             }
+            /*If over half the columns match, the entries are considered a match*/
             if(numMatchingColumns >= 5) {
                 return i;
             }
@@ -47,8 +53,11 @@ public class DuplicateFinderService {
 
     public String findDuplicates(String filename) {
         ArrayList<ArrayList<Entry>> entries = new ArrayList<>();
+        /* Open File */
         try(FileReader fr = new FileReader("../test-files/" + filename)) {
             CSVReader reader = new CSVReader(fr);
+
+            /*Pull out the column headers and add the first line to match against*/
             String[] headers = reader.readNext();
             String[] firstLine = reader.readNext();
             Entry entrifiedFirstLine = convertToEntryObject(firstLine);
@@ -56,10 +65,13 @@ public class DuplicateFinderService {
             firstEntry.add(entrifiedFirstLine);
             entries.add(firstEntry);
             String[] row;
+
+            /* Match each row against all previously read rows to check for duplicates*/
             while((row = reader.readNext()) != null) {
                 Entry entrifiedRow = convertToEntryObject(row);
                 int matchIndex = findMatches(entries, entrifiedRow);
 
+                /*If there's a match, add it to its match's list, otherwise add it as a new entry*/
                 if(matchIndex < 0) {
                     ArrayList<Entry> newEntry = new ArrayList<>();
                     newEntry.add(entrifiedRow);
