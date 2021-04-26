@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
-import Hello from '../components/Hello';
+import DuplicateTable from '../components/DuplicateTable';
 
-class HelloPage extends Component {
+class DuplicatesPage extends Component {
   render() {
     return (
       <div className='app'>
         <div className='app-body'>
           <Container fluid className='text-center'>
-            <Hello />
+            <DuplicateTable />
           </Container>
         </div>
       </div>
@@ -16,4 +16,4 @@ class HelloPage extends Component {
   }
 }
 
-export default HelloPage;
+export default DuplicatesPage;

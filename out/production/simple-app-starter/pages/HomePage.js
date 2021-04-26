@@ -6,7 +6,6 @@ class HomePage extends Component {
     return (
         <div className="home-page">
           <Link to="/hello">Click to see hello message</Link>
-          <Link to="/find-dupes">Click to find duplicates in normal.csv</Link>
         </div>
     );
   }
