@@ -53,6 +53,7 @@ class DuplicateTable extends Component {
         id++;
         let parentId = id;
         let output = [];
+        let parent = entryList.shift();
         output[0] =
           <tr
             key={parentId}
@@ -73,7 +74,8 @@ class DuplicateTable extends Component {
           <td>{entryList[0].shortState}</td>
           <td>{entryList[0].phone}</td>
         </tr>;
-        output[1] = entryList.splice(0, 1).map((entry) => {
+
+        output[1] = entryList.map((entry) => {
           id++;
           return(
             <tr
