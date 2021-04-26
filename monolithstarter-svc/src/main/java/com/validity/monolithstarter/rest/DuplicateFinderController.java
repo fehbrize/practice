@@ -19,4 +19,5 @@ public class DuplicateFinderController {
         public String getDuplicates() throws FileNotFoundException {
             return duplicateFinder.findDuplicates("normal.csv");
         }
+
 }

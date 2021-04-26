@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import {Button} from "reactstrap";
 
 class HomePage extends Component {
   render() {
     return (
         <div className="home-page">
-          <Link to="/hello">Click to see hello message</Link>
-          <Link to="/find-dupes">Click to find duplicates in normal.csv</Link>
+          <Link to="/find-dupes">
+            <Button className="start-button">Click to find duplicates.</Button>
+          </Link>
         </div>
     );
   }
